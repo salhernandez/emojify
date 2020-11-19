@@ -5,8 +5,6 @@ function StringToEmoji(document_root) {
         action: "consoleLog",
         source: document_root.getElementsByTagName("p")
     });
-
-    return html;
 }
 
 StringToEmoji(document);
