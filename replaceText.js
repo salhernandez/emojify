@@ -19239,13 +19239,11 @@ function StringToEmoji(document_root) {
         "unicode_version": "11.0",
         "ios_version": "12.1"
     }]
-    // tokenize words and lookup one word at a time
     
-    // returns an object with key value pairs starting at 0
-    pTags = document_root.getElementsByTagName("p");
+    tags = document_root.querySelectorAll("p, h1, h2, h3, h4, h5, h6");
 
-    Object.keys(pTags).forEach(tagKey => {
-        let originalText = pTags[tagKey].innerText;
+    Object.keys(tags).forEach(tagKey => {
+        let originalText = tags[tagKey].innerText;
         let originalLowerCase = originalText.toLowerCase();
 
         let originalTokenized = originalText.split(" ");
@@ -19261,7 +19259,7 @@ function StringToEmoji(document_root) {
             });
         });
 
-        pTags[tagKey].innerHTML = originalTokenized.join(" ");
+        tags[tagKey].innerHTML = originalTokenized.join(" ");
     })
 }
 
