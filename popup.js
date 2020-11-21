@@ -13,7 +13,7 @@ chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
     // console.log(tab.title, document);
 
     chrome.tabs.executeScript(null, {
-      file: "getPagesSource.js"
+      file: "replaceText.js"
     }, function() {
       // If you try and inject into an extensions page or the webstore/NTP you'll get an error
       if (chrome.runtime.lastError) {
