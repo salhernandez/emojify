@@ -9,10 +9,8 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 });
 
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
-  if (changeInfo.status == 'complete' && tab.active) {
-    // console.log(tab.title, document);
-
-    chrome.tabs.executeScript(null, {
+  if (changeInfo.status == 'complete') {
+    chrome.tabs.executeScript(tabId, {
       file: "replaceText.js"
     }, function() {
       // If you try and inject into an extensions page or the webstore/NTP you'll get an error
