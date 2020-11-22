@@ -1,10 +1,10 @@
 chrome.runtime.onMessage.addListener(function(request, sender) {
   if (request.action == "consoleLog") {
-    console.log("consoleLog", request.source)
+    // console.log("consoleLog", request.source)
   }
   if (request.action == "getSource") {
     // message.innerText = request.source;
-    console.log("getSource", request.source)
+    // console.log("getSource", request.source)
   }
 });
 
