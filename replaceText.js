@@ -1,5 +1,37 @@
-function StringToEmoji(document_root) {
-    let emojiJson = [{
+function StringToEmoji(document_root) {    
+    tags = document_root.querySelectorAll("p, h1, h2, h3, h4, h5, h6");
+
+    Object.keys(tags).forEach(tagKey => {
+        let originalText = tags[tagKey].innerText;
+        let originalLowerCase = originalText.toLowerCase();
+
+        let originalTokenized = originalText.split(" ");
+        let tokenized = originalLowerCase.split(" ");
+        
+        tokenized.forEach((token, index) => {
+            // replace word with aliases
+            getEmojiJson().forEach(emoji => {
+                let tehee = emoji.aliases.find(aliases => aliases === token);
+                if(tehee){
+                    originalTokenized[index] = emoji.emoji
+                }
+            });
+        });
+
+        tags[tagKey].innerHTML = originalTokenized.join(" ");
+    })
+}
+
+StringToEmoji(document);
+
+chrome.runtime.sendMessage({
+    action: "getSource",
+    // source: StringToEmoji(document)
+    source: "test"
+});
+
+function getEmojiJson(){
+    return [{
         "emoji": "😀",
         "description": "grinning face",
         "category": "Smileys & Emotion",
@@ -19238,35 +19270,5 @@ function StringToEmoji(document_root) {
         "tags": [],
         "unicode_version": "11.0",
         "ios_version": "12.1"
-    }]
-    
-    tags = document_root.querySelectorAll("p, h1, h2, h3, h4, h5, h6");
-
-    Object.keys(tags).forEach(tagKey => {
-        let originalText = tags[tagKey].innerText;
-        let originalLowerCase = originalText.toLowerCase();
-
-        let originalTokenized = originalText.split(" ");
-        let tokenized = originalLowerCase.split(" ");
-        
-        tokenized.forEach((token, index) => {
-            // replace word with aliases
-            emojiJson.forEach(emoji => {
-                let tehee = emoji.aliases.find(aliases => aliases === token);
-                if(tehee){
-                    originalTokenized[index] = emoji.emoji
-                }
-            });
-        });
-
-        tags[tagKey].innerHTML = originalTokenized.join(" ");
-    })
+    }];
 }
-
-StringToEmoji(document);
-
-chrome.runtime.sendMessage({
-    action: "getSource",
-    // source: StringToEmoji(document)
-    source: "test"
-});
