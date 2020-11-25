@@ -1,157 +1,116 @@
 var storage = chrome.storage.local;
 
-//when the extension opens
-// "load" is triggered when a page is fully loaded
+// When Chrome Extension popup fully loads
 window.addEventListener('load', function (evt) {
   isFreshInstall();
   changeUI();
 
-  let emojiButton = document.getElementById('emojify-button');
-  if(emojiButton){
-    emojiButton.onclick = doSwitchOnStack;
+  let emojiButton = document.getElementById('checkbox');
+  if (emojiButton) {
+    emojiButton.addEventListener('change', doSwitchOnStack);
   }
 });
 
-function isFreshInstall(){
-  //check for key
-  //if it doesn't exist
-    //create options payload and set it
-    //create freshInstall key, and set to false
-  //else
-    //it exists and its not fresh install
-    storage.get("freshInstall", function(items){
-
-      //not a fresh install
-      if(items.freshInstall === false){
-      }
-      else{//fresh install
-          chrome.storage.local.set({ "freshInstall": false }, function(){
-            let anObject = {
-              userOptions: {
-                stackOverflow: true
-              }
-            }
-
-            //set value
-            storage.set({'options': anObject}, function() {
-            });
-          });
+// When a tab is finished loading
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  if (changeInfo.status == 'complete') {
+    storage.get('options', function (items) {
+      if (items.options.userOptions.replaceWithEmojis) {
+        chrome.tabs.executeScript(tabId, {
+          file: "replaceText.js"
+        }, function () {
+          // If you try and inject into an extensions page or the webstore/NTP you'll get an error
+          if (chrome.runtime.lastError) {
+            // message.innerText = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
+            console.log('There was an error injecting script : \n' + chrome.runtime.lastError.message)
+          }
+        });
       }
     });
   }
+})
 
-  //UI related code
-function doSwitchOnStack() {
-  let emojiButton = document.getElementById('emojify-button');
-  if(emojiButton){
-    //turn off
-    if(emojiButton.className == "on") {
-      emojiButton.className="off";
-      emojiButton.innerHTML = "off";
-      updateData("stackOverflow", false);
-
-    } else {//turn on
-      emojiButton.className="on";
-      emojiButton.innerHTML = "on";
-      updateData("stackOverflow", true);
-    }
+//UI related code
+function doSwitchOnStack(event) {
+  console.log("we be here")
+  let emojiButton = document.getElementById('checkbox');
+  let value = event.target.checked;
+  if (emojiButton) {
+    updateData("replaceWithEmojis", value)
+    emojiButton.checked = value;
   }
 }
 
-//aruments, what to update, value
-//saved using chrome extenion API
-function updateData(uType, uValue){
-  /*Grab Value. Update the needed header, set the values again
-  */
-  let tempOptions = {};
-  storage.get('options', function(items) {
+function isFreshInstall() {
+  storage.get("freshInstall", function (items) {
 
+    //not a fresh install
+    if (items.freshInstall === false) {
+
+    } else { //fresh install
+      chrome.storage.local.set({
+        "freshInstall": false
+      }, function () {
+        let anObject = {
+          userOptions: {
+            replaceWithEmojis: true
+          }
+        }
+
+        //set value
+        storage.set({
+          'options': anObject
+        }, function () {});
+      });
+    }
+  });
+}
+
+function changeUI() {
+  storage.get('options', function (items) {
+    if (items.options) {
+      let emojiButton = document.getElementById('checkbox');
+      if (emojiButton) {
+        if (items.options.userOptions.replaceWithEmojis) {
+          emojiButton.checked = true;
+        } else {
+          emojiButton.checked = false;
+        }
+      }
+    }
+  });
+}
+
+function updateData(uType, uValue) {
+  let tempOptions = {};
+
+  storage.get('options', function (items) {
     //if the object has been created before
     if (items.options) {
-      // textarea.value = items.css;
-      // alert("Loaded saved options: ");
       //store options object
       tempOptions = items.options;
-
       //update value
       tempOptions.userOptions[uType] = uValue;
-
       //set value
-      storage.set({'options': tempOptions}, function() {
-        // Notify that we saved.
-        // alert("Settings saved with updates: "+uType+" to "+uValue);
+      storage.set({
+        'options': tempOptions
       });
     }
 
     //if the object has not been created before
-    else{
-      let anObject =
-      {
+    else {
+      tempOptions = {
         userOptions: {
-          stackOverflow: true
+          replaceWithEmojis: true
         }
       }
-
       //update the object
-      anObject.userOptions[uType] = uValue;
+      tempOptions.userOptions[uType] = uValue;
 
       //set value
-      storage.set({'options': anObject}, function() {
-      // Notify that we saved.
-      // alert("Settings saved");
-    });
-  }
-  });
-}
-
-function changeUI(){
-  storage.get('options', function(items) {
-    if (items.options) {
-      let emojiButton = document.getElementById('emojify-button');
-      if(emojiButton){
-        if(items.options.userOptions.stackOverflow) {
-          emojiButton.className="on";
-          emojiButton.innerHTML="on";
-  
-        } else {
-          emojiButton.className="off";
-          emojiButton.innerHTML="off";
-        }
-      }
+      storage.set({
+        'options': tempOptions
+      });
     }
   });
 }
-
-chrome.runtime.onMessage.addListener(function(request, sender) {
-  if (request.action == "consoleLog") {
-    // console.log("consoleLog", request.source)
-  }
-  if (request.action == "getSource") {
-    // message.innerText = request.source;
-    // console.log("getSource", request.source)
-  }
-});
-
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-      if (changeInfo.status == 'complete') {
-
-        storage.get('options', function (items) {
-
-
-          if (items.options.userOptions.stackOverflow) {
-            chrome.tabs.executeScript(tabId, {
-              file: "replaceText.js"
-            }, function () {
-              // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-              if (chrome.runtime.lastError) {
-                // message.innerText = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
-                console.log('There was an error injecting script : \n' + chrome.runtime.lastError.message)
-              }
-            });
-          }
-
-
-        });
-
-      }
-})
