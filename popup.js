@@ -7,7 +7,7 @@ window.addEventListener('load', function (evt) {
 
   let emojiButton = document.getElementById('checkbox');
   if (emojiButton) {
-    emojiButton.addEventListener('change', doSwitchOnStack);
+    emojiButton.addEventListener('change', onSwitchChange);
   }
 });
 
@@ -30,9 +30,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   }
 })
 
-//UI related code
-function doSwitchOnStack(event) {
-  console.log("we be here")
+function onSwitchChange(event) {
   let emojiButton = document.getElementById('checkbox');
   let value = event.target.checked;
   if (emojiButton) {
