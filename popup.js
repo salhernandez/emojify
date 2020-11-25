@@ -62,7 +62,7 @@ checkInstallType = () => {
   });
 }
 
-function updateUI() {
+updateUI = () => {
   storage.get('options', (items) => {
     if (items.options) {
       let emojiButton = document.getElementById('checkbox');
@@ -77,7 +77,7 @@ function updateUI() {
   });
 }
 
-function updateData(uType, uValue) {
+updateData = (uType, uValue) => {
   let tempOptions = {};
 
   storage.get('options', (items) => {
