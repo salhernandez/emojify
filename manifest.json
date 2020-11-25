@@ -9,9 +9,13 @@
 		"scripts": ["popup.js"],
 		"persistent": true
 	},
+	"browser_action": {
+		"default_popup": "popup.html"
+	},
 	"permissions": [
 		"tabs",
         "http://*/",
-        "https://*/"
+		"https://*/",
+		"storage"
     ]
 }
