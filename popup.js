@@ -6,7 +6,10 @@ window.addEventListener('load', function (evt) {
   isFreshInstall();
   changeUI();
 
-  document.getElementById('emojify-button').onclick = doSwitchOnStack
+  let emojiButton = document.getElementById('emojify-button');
+  if(emojiButton){
+    emojiButton.onclick = doSwitchOnStack;
+  }
 });
 
 function isFreshInstall(){
@@ -39,18 +42,20 @@ function isFreshInstall(){
 
   //UI related code
 function doSwitchOnStack() {
-  let stackButton = document.getElementById('emojify-button');
+  let emojiButton = document.getElementById('emojify-button');
+  if(emojiButton){
     //turn off
-    if(stackButton.className == "on") {
-      stackButton.className="off";
-      stackButton.innerHTML = "off";
+    if(emojiButton.className == "on") {
+      emojiButton.className="off";
+      emojiButton.innerHTML = "off";
       updateData("stackOverflow", false);
 
     } else {//turn on
-      stackButton.className="on";
-      stackButton.innerHTML = "on";
+      emojiButton.className="on";
+      emojiButton.innerHTML = "on";
       updateData("stackOverflow", true);
     }
+  }
 }
 
 //aruments, what to update, value
@@ -102,15 +107,16 @@ function updateData(uType, uValue){
 function changeUI(){
   storage.get('options', function(items) {
     if (items.options) {
-      let stackButton = document.getElementById('emojify-button');
-
-      if(items.options.userOptions.stackOverflow) {
-        stackButton.className="on";
-        stackButton.innerHTML="on";
-
-      } else {
-        stackButton.className="off";
-        stackButton.innerHTML="off";
+      let emojiButton = document.getElementById('emojify-button');
+      if(emojiButton){
+        if(items.options.userOptions.stackOverflow) {
+          emojiButton.className="on";
+          emojiButton.innerHTML="on";
+  
+        } else {
+          emojiButton.className="off";
+          emojiButton.innerHTML="off";
+        }
       }
     }
   });
