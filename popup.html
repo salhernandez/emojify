@@ -3,46 +3,52 @@
 <html>
 
 <head>
-	<title>Emojify</title>
-	<!-- define on/off styles -->
-     <style type="text/css">
+    <title>Emojify</title>
+    <!-- define on/off styles -->
+    <style type="text/css">
+        .on {
+            background: #1DE9B6;
+        }
 
-		 .on  { background: #1DE9B6; }
-		 .off { background: #EF5350; }
+        .off {
+            background: #EF5350;
+        }
 
-		 body{
-			   background: #0F1012;
-			   color: #f9f9f9;
-  		   font-family: 'Open Sans', sans-serif;
-				 font-size: 14px;
-		 }
-			button {
-			  border: none;
-			  border-radius: 40px;
-			  /*background: #292b2e;*/
-			  color: #f9f9f9;
-			  padding: 10px 37px;
-			  margin: 10px 0 20px 60px;
-			}
+        body {
+            background: #0F1012;
+            color: #f9f9f9;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+        }
 
-			table {
-			  width: 100%;
-			  background: #292b2e;
-			  text-align: center;
-			}
-	 </style>
+        button {
+            border: none;
+            border-radius: 40px;
+            /*background: #292b2e;*/
+            color: #f9f9f9;
+            padding: 10px 37px;
+            margin: 10px 0 20px 60px;
+        }
+
+        table {
+            width: 100%;
+            background: #292b2e;
+            text-align: center;
+        }
+    </style>
 </head>
 
-	<body>
-		<table class="wrapper">
-		  <tr>
-				<h1>Emojify</h1>
-		  </tr>
-		  <tr>
-				<td>Emojify</td>
-				<td><button type="button" id="emojify-button" class="on">toggle</button></td>
-		  </tr>
-		</table>
-		<script src="popup.js"></script>
-	</body>
+<body>
+    <table class="wrapper">
+        <tr>
+            <h1>Emojify</h1>
+        </tr>
+        <tr>
+            <td>Emojify</td>
+            <td><button type="button" id="emojify-button" class="on">toggle</button></td>
+        </tr>
+    </table>
+    <script src="popup.js"></script>
+</body>
+
 </html>
