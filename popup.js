@@ -2,8 +2,8 @@ var storage = chrome.storage.local;
 
 // When Chrome Extension popup fully loads
 window.addEventListener('load', function (evt) {
-  isFreshInstall();
-  changeUI();
+  checkInstallType();
+  updateUI();
 
   let emojiButton = document.getElementById('checkbox');
   if (emojiButton) {
@@ -41,7 +41,7 @@ function doSwitchOnStack(event) {
   }
 }
 
-function isFreshInstall() {
+function checkInstallType() {
   storage.get("freshInstall", function (items) {
 
     //not a fresh install
@@ -66,7 +66,7 @@ function isFreshInstall() {
   });
 }
 
-function changeUI() {
+function updateUI() {
   storage.get('options', function (items) {
     if (items.options) {
       let emojiButton = document.getElementById('checkbox');
