@@ -1,21 +1,3 @@
-# emojify
-Ever wondered what would happen if you replaced all the words of a webpage with their emoji equivalent, like `t-rex` replaced with 🦖, and `dolphin` replaced with 🐬? Well look no further, I've created this Chrome Extension so you don't have to.
-
-## Demo
-![emojify demo](https://raw.githubusercontent.com/salhernandez/emojify/main/assets/emojify.gif?token=ADXPKJYFC52XVXG2PVPFW327ZG6YY)
-
-The Chrome Extension replaces single word emojis  in the `p`, `h1`, `h2`, `h3`, `h4`, `h5` and `h6` tags.
-
-# Resources needed to complete project
-
-- List of emojis and their aliases
-    - [https://github.com/github/gemoji/blob/master/db/emoji.json](https://github.com/github/gemoji/blob/master/db/emoji.json)
-- [Chrome Storage API](https://developer.chrome.com/apps/storage)
-- [Chrome Tabs API](https://developer.chrome.com/extensions/tabs)
-
-# Words to Emoji Mappings
-These mapppings can also be found on `emojis.json`.
-```JSON
 {
     "100": "💯",
     "1234": "🔢",
@@ -981,23 +963,3 @@ These mapppings can also be found on `emojis.json`.
     "scotland": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
     "wales": "🏴󠁧󠁢󠁷󠁬󠁳󠁿"
 }
-```
-
-# Usage Instructions
-This Chrome Extension is not published to the Chrome Web Store, you need to install it in developer mode. You can find those instructions [here](#development)
-
-1. Click on Extension Icon
-   1. Enable\Disable emojification
-
-# Development
-1. Clone this repository.
-1. Open up Chrome and go to the `chrome://extensions/` page (Window → Extensions).
-1. Enable developer mode (if it's not already).
-1. Click on `Load unpacked extension`.
-1. Select the folder for this extension.
-
-## Keyboard Shortcut
-Go to the bottom of the `chrome://extensions/` page, click on `Keyboard shortcuts` and add the shortcut of your choice.
-
-## Credits
-* Original Emoji JSON borrowed from [github/gemoji](https://github.com/github/gemoji/blob/master/db/emoji.json):

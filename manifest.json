@@ -1,0 +1,22 @@
+{
+	"manifest_version": 2,
+	"name": "Emojify",
+	"description": "Emojify page",
+	"version": "1.0",
+	"author": "Salvador Hernandez",
+	"background": {
+		"scripts": [
+			"popup.js"
+		],
+		"persistent": true
+	},
+	"browser_action": {
+		"default_popup": "popup.html"
+	},
+	"permissions": [
+		"tabs",
+		"http://*/",
+		"https://*/",
+		"storage"
+	]
+}
