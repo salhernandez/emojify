@@ -5,7 +5,9 @@
 	"version": "1.0",
 	"author": "Salvador Hernandez",
 	"background": {
-		"scripts": ["popup.js"],
+		"scripts": [
+			"popup.js"
+		],
 		"persistent": true
 	},
 	"browser_action": {
@@ -13,8 +15,8 @@
 	},
 	"permissions": [
 		"tabs",
-        "http://*/",
+		"http://*/",
 		"https://*/",
 		"storage"
-    ]
+	]
 }
