@@ -35,6 +35,7 @@ onSwitchChange = (event) => {
   if (emojiButton) {
     updateData("replaceWithEmojis", value)
     emojiButton.checked = value;
+    document.getElementById("popup-message").innerText = "refresh page to see changes";
   }
 }
 
