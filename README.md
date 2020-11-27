@@ -2,8 +2,7 @@
 Ever wondered what would happen if you replaced all the words of a webpage with their emoji equivalent, like `t-rex` replaced with 🦖, and `dolphin` replaced with 🐬? Well look no further, I've created this Chrome Extension so you don't have to.
 
 ## Demo
-
-<demo>
+![emojify demo](https://raw.githubusercontent.com/salhernandez/emojify/main/assets/emojify.gif?token=ADXPKJYFC52XVXG2PVPFW327ZG6YY)
 
 The Chrome Extension replaces single word emojis  in the `p`, `h1`, `h2`, `h3`, `h4`, `h5` and `h6` tags.
 
